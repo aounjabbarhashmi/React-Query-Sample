@@ -1,24 +1,34 @@
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./App.css";
-import { useFetchRepositories } from "./hooks/dataAPI";
+import ZustandExample from "./pages/ZustandExample.jsx";
+import ReactQueryExample from "./pages/ReactQueryExample.jsx";
+
 
 function App() {
-  const { data, isLoading } =
-    useFetchRepositories("repos");
-  console.log(data);
   return (
-    <>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        data?.map((item,index) => {
-          return (
-            <div key={index}>
-              {item.title}
-            </div>
-          )
-        })
-      )}
-    </>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<ReactQueryExample/>}
+          ></Route>
+          <Route
+            path="/react-query"
+            element={<ReactQueryExample/>}
+          ></Route>
+          <Route
+            path="/react-zustand"
+            element={<ZustandExample/>}
+          ></Route>
+    
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
